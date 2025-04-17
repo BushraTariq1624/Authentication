@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaBox, FaChartBar, FaUsers, FaShoppingCart, FaTimes } from 'react-icons/fa';
-import Products from './products';
+// import Products from './products';
 
 const AdminDashboard = () => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -82,7 +82,6 @@ const AdminDashboard = () => {
 				return (
 					<div className='p-6'>
 						<h2 className='text-2xl font-bold mb-6'>Product Management</h2>
-						<Products />
 					</div>
 				);
 			default:

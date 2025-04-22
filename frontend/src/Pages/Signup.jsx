@@ -50,7 +50,7 @@ const Signup = () => {
             setLoading(true);
             console.log("values:", values);
             try {
-              const response = await fetch("http://localhost:5000/api/auth/user", {
+              const response = await fetch(`import.meta.env.VITE_REACT_APP_BACKEND_BASEURL/api/auth/user`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values),

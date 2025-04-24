@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: ['http://localhost:5173','https://authentication-chi-dusky.vercel.app','https://authentication-hmh6.vercel.app'],
+		origin: ['https://authentication-hmh6.vercel.app'],
 		methods: ['GET', 'PUT', 'POST', 'DELETE'],
 		credentials: true,
 	}),

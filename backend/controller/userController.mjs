@@ -68,22 +68,22 @@ export {
 
 // for admin
 
-export const isAdmin = async (req, res) => {
-  const { userId } = req.user;
-  const {role} = await User.findById(userId);
+// export const isAdmin = async (req, res) => {
+//   const { userId } = req.user;
+//   const {role} = await User.findById(userId);
   
-  if(role !== "admin"){
-    console.log("❌ user is not an admin")
-   return  res.status(401).json({
-      success:false,
-      message:"❌ user is not an admin",
-      isAdmin :false
-    })
-  }
-  res.status(200).json({
-    success:true,
-    message:"✔ user is  an admin",
-    isAdmin :true
-  })
-console.log("✔ user is  an admin")
-};
+//   if(role !== "admin"){
+//     console.log("❌ user is not an admin")
+//    return  res.status(401).json({
+//       success:false,
+//       message:"❌ user is not an admin",
+//       isAdmin :false
+//     })
+//   }
+//   res.status(200).json({
+//     success:true,
+//     message:"✔ user is  an admin",
+//     isAdmin :true
+//   })
+// console.log("✔ user is  an admin")
+// };

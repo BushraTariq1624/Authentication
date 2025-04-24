@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: ['http://localhost:5173','https://authentication-beta-virid.vercel.app/','https://authentication-frontend-one.vercel.app/'],
+		origin: ['http://localhost:5173'],
 		methods: ['GET', 'PUT', 'POST', 'DELETE'],
 		credentials: true,
 	}),

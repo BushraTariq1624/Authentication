@@ -11,7 +11,7 @@ import SignUp from './Pages/Signup';
 import Logout from "./Pages/Logout" 
 // import Profile from "./Pages/Profile"
 // import Admin from "./Pages/AdminPage"
-// import Update from './Pages/Update';
+import Addtask from './Pages/Addtask';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
         {/* <Route path="/admin" element={<Admin />} /> */}
         {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/update" element={<Update />} /> */}
+        <Route path="/Addtask" element={<Addtask />} />
     </Routes>
     {!adminPage && <Footer />}
     </>

@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom"; // Import Link for routing
-import logo from "../assets/images/logo (4).png";
+// import logo from "../assets/images/logo (4).png";
 import { useSelector } from "react-redux";
 
 const Navigation = () => {
@@ -24,12 +24,12 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg text-[#BD1521]">
+    <nav className="bg-orange-300 shadow-lg text-[#BD1521]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link to="/">
-              <img className="h-8 w-auto md:h-30" src={logo} alt="logo" />
+              <img className="h-8 w-auto md:h-30" src="https://d1yjjnpx0p53s8.cloudfront.net/task_manager_logo.png" alt="logo" />
             </Link>
           </div>
 
@@ -41,7 +41,9 @@ const Navigation = () => {
             <NavLink to="/contact" text="Contact" />
 
             {isAuthenticated ? (
-              <NavLink to="/logout" text="Logout" />
+              <>
+                <NavLink to="/logout" text="Logout" />
+              </>
             ) : (
               <>
                 <NavLink to="/signup" text="Sign Up" />
@@ -51,15 +53,16 @@ const Navigation = () => {
           </div>
 
           <div className="flex gap-6">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <Link to="/cart" className="relative flex items-center">
                 <FontAwesomeIcon
                   icon={faShoppingBag}
                   className="h-6 w-6 sm:h-8 sm:w-8 hover:text-[#4bf6d4] transition duration-300"
                 />
               </Link>
-            </div>
-
+            </div> */}
+           <Link to="/Addtask">
+           <button className="text-white hover:bg-orange-300 bg-orange-400 p-2 rounded-lg">Add Task</button></Link>
             <div className="sm:hidden">
               <button
                 onClick={toggleMenu}
@@ -77,9 +80,8 @@ const Navigation = () => {
       </div>
 
       <div
-        className={`${
-          isOpen ? "block" : "hidden"
-        } sm:hidden bg-white shadow-md`}
+        className={`${isOpen ? "block" : "hidden"
+          } sm:hidden bg-white shadow-md`}
       >
         <div className="px-4 pt-2 pb-3 space-y-2">
           <NavLinkMobile to="/" text="Home" onClick={toggleMenu} />

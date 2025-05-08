@@ -19,6 +19,8 @@ const Addtask = () => {
   };
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem("token");
+
     e.preventDefault();
     setStatus('Submitting...');
 
@@ -26,13 +28,16 @@ const Addtask = () => {
       const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/task`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+
         },
         body: JSON.stringify(formData)
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
       }
 
       const result = await response.json();

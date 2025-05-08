@@ -40,10 +40,10 @@ const Login = () => {
 			setLoading(false);
 			if (response.ok) {
 				localStorage.setItem("token",data.token)
-				localStorage.setItem("userId",data._id)
+				localStorage.setItem("userId",data.user._id)
 				dispatch(loginSuccess({
 					token:data.token,
-					userId:data._id
+					userId:data.user._id
 				}))
 				toast.success(data.message);
 

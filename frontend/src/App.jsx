@@ -9,7 +9,7 @@ import LoginPage from './Pages/LoginPage';
 import SignUp from './Pages/Signup';
 // import Cart from "./Pages/Cart" 
 import Logout from "./Pages/Logout" 
-// import Profile from "./Pages/Profile"
+import Profile from "./Pages/Profile"
 // import Admin from "./Pages/AdminPage"
 import Addtask from './Pages/Addtask';
 import { ToastContainer } from 'react-toastify';
@@ -43,7 +43,7 @@ const App = () => {
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/logout" element={<Logout />} />
         {/* <Route path="/admin" element={<Admin />} /> */}
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
         <Route path="/Addtask" element={<Addtask />} />
     </Routes>
     {!adminPage && <Footer />}

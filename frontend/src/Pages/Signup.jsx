@@ -64,7 +64,7 @@ const Signup = () => {
                 localStorage.setItem("userId", data._id)
                 dispatch(loginSuccess({
                   token: data.token,
-                  userId: data.userId
+                  userId: data._id
                 }))
                 toast.success(data.message);
                 navigate('/');
@@ -123,7 +123,7 @@ const Signup = () => {
 
             <button
               type="submit"
-              className="w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 rounded-md transition-all duration-300 disabled:bg-gray-500"
+              className="w-full bg-orange-500 hover:bg-orange-300 text-white font-medium py-2 rounded-md transition-all duration-300 disabled:bg-gray-500"
               disabled={loading}
             >
               {loading ? "Signing Up..." : "Sign Up"}

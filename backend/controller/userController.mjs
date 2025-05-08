@@ -14,7 +14,6 @@ const login = async (req, res) => {
       const checkPassword = bcrypt.compareSync(password, user.password);
       if (checkPassword) {
         var token = JWT.sign({ userId: user._id }, process.env.JWT_SECRET);
-
         res
           .status(200)
           .json({ status: 200, message: "Login Successfull", user, token });
@@ -59,11 +58,33 @@ const createUser = async (req, res) => {
     });
   }
 };
+const getLoggedInUser = async (req, res) => {
+  try {
+
+    const {userId}= req.user
+    // The tokenVerification middleware already decodes the token and attaches the user's email to `req.user`
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({ status: 404, message: "User not found" });
+    }
+
+    res.status(200).json({ status: 200, user });
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
 
 
 export {
   login,
-  createUser
+  createUser,
+  getLoggedInUser
 };
 
 // for admin

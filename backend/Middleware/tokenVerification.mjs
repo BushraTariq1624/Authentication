@@ -5,13 +5,16 @@ const tokenVerification = (req, res, next) => {
     try {
 
         if (req.headers?.authorization) {
+
             const token = req.headers.authorization.split(" ")[1];
+            // console.log(token);
+            
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             if (decoded) {
                 req.user = decoded; // Attach decoded user data (e.g., email) to the request object
                 next();
             } else {
-                res.status(401).send({ status: 401, message: "Unauthorized Token" });
+                res.status(401).send({ status: 401, message: "Unauthorized" });
             }
         } else {
             res.status(401).send({ status: 401, message: "Unauthorized Access" });

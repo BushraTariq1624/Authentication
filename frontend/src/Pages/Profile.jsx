@@ -90,7 +90,7 @@ const Profile = () => {
         {/* Card Header */}
         <div className="bg-orange-300 text-white p-6 flex">
           <p className="text-gray-900 w-64 flex-1 ">Welcome back, {user.name}!</p>
-         
+
         </div>
 
         {/* Card Body */}
@@ -115,7 +115,7 @@ const Profile = () => {
 
         {/* Card Footer */}
         <div className="bg-gray-50 p-4">
-   
+
 
           <button
             onClick={() => navigate("/")}

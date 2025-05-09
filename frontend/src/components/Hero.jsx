@@ -1,14 +1,49 @@
 import { useNavigate } from 'react-router-dom';
-import React from 'react'
+import React, { useEffect,useState } from 'react'
+import { toast } from "react-toastify";
+
 // import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Hero = () => {
+	const [task, setTask] = useState([]);
 	const navigate = useNavigate();
 	const handleLogin = () => {
 		navigate('/login');
 	};
 	const { isAuthenticated } = useSelector((state) => state.auth);
+	useEffect(() => {
+		if (!isAuthenticated) return;
+
+		const fetchAllTasks = async () => {
+			const token = localStorage.getItem("token");
+			const userId = localStorage.getItem("userId");
+			try {
+				const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/getalltasks`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${token}`,
+						userId :`${userId}`
+					},
+				});
+				const data = await response.json();
+				if (response.ok) {
+					setTask(data.task);
+					console.log(data.task)
+				} else {
+					toast.error(data.message || "Failed to fetch user details");
+					navigate("/login");
+				}
+			} catch (error) {
+				console.error("Error:", error);
+				toast.error("An error occurred while fetching user details");
+				navigate("/Addtask");
+			}
+		}
+		fetchAllTasks()
+	}, [isAuthenticated])
+
 	return (
 		<>
 			{isAuthenticated ? (<section className="text-gray-600 body-font">
@@ -20,8 +55,7 @@ const Hero = () => {
 									Pending
 								</h1>
 								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-									microdosing tousled waistcoat.
+									{/* {task.title} */}
 								</p>
 							</div>
 						</div>
@@ -50,19 +84,27 @@ const Hero = () => {
 					</div>
 				</div>
 			</section>) : (
-			<section class="text-gray-600 body-font">
-				<div class="container px-5 py-24 mx-auto">
-					<div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
-						<h1 class="flex-grow sm:pr-16 text-5xl font-medium title-font text-gray-900">Welcome To Our Task Manager.
-						<p>Please Login Your Account To Add & Manage Task</p>
-						</h1>
-						<button class="flex-shrink-0 text-white bg-orange-400 border-0 py-2 px-8 focus:outline-none hover:bg-orange-300 rounded text-lg mt-10 sm:mt-0" onClick={handleLogin}>Login</button>
+				<section className="text-gray-600 body-font">
+					<div className="container px-5 py-24 mx-auto">
+						<div className="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+							<h1 className="flex-grow sm:pr-16 text-5xl font-medium title-font text-gray-900">Welcome To Our Task Manager.
+								<p>Please Login Your Account To Add & Manage Task</p>
+							</h1>
+							<button className="flex-shrink-0 text-white bg-orange-400 border-0 py-2 px-8 focus:outline-none hover:bg-orange-300 rounded text-lg mt-10 sm:mt-0" onClick={handleLogin}>Login</button>
+						</div>
 					</div>
-				</div>
-			</section>)}
+				</section>)}
 		</>
 
 	)
 }
 
 export default Hero
+// useEffect(() => {
+//     if (!isAuthenticated) return;
+
+//     const fetchAllTasks = async () => {
+//         ...
+//     };
+//     fetchAllTasks();
+// }, [isAuthenticated]);

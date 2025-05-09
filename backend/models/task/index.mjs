@@ -11,6 +11,11 @@ const taskSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.String,
             required: true,
         },
+        status: {
+            // type: String,
+            type: mongoose.Schema.Types.String,
+            required: true,
+        },
         description: {
             // type: String,
             type: mongoose.Schema.Types.String,

@@ -9,9 +9,9 @@ const createTask = async (req, res) => {
     return req.status(400).json({ message: "Bad request" });
   }
   try {
-    const { title, assignedTo, description } = req.body;
+    const { title, assignedTo,status, description } = req.body;
     const userId = req.headers.userId;
-    const newTask = await Task.create({ title, assignedTo, description });
+    const newTask = await Task.create({ title, assignedTo,status, description });
     await User.findByIdAndUpdate(userId, { $push: { tasks: newTask._id } });
     res.status(201).json({ task: newTask });
     // const task = await taskSchema.validateAsync(req.body);

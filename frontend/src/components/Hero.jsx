@@ -1,49 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect,useState } from 'react'
+import Card from './Card';
+import React from 'react'
 import { toast } from "react-toastify";
 
 // import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Hero = () => {
-	const [task, setTask] = useState([]);
 	const navigate = useNavigate();
 	const handleLogin = () => {
 		navigate('/login');
 	};
 	const { isAuthenticated } = useSelector((state) => state.auth);
-	useEffect(() => {
-		if (!isAuthenticated) return;
-
-		const fetchAllTasks = async () => {
-			const token = localStorage.getItem("token");
-			const userId = localStorage.getItem("userId");
-			try {
-				const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/getalltasks`, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-						userId :`${userId}`
-					},
-				});
-				const data = await response.json();
-				if (response.ok) {
-					setTask(data.task);
-					console.log(data.task)
-				} else {
-					toast.error(data.message || "Failed to fetch user details");
-					navigate("/login");
-				}
-			} catch (error) {
-				console.error("Error:", error);
-				toast.error("An error occurred while fetching user details");
-				navigate("/Addtask");
-			}
-		}
-		fetchAllTasks()
-	}, [isAuthenticated])
-
+	
 	return (
 		<>
 			{isAuthenticated ? (<section className="text-gray-600 body-font">
@@ -55,7 +24,7 @@ const Hero = () => {
 									Pending
 								</h1>
 								<p className="leading-relaxed mb-3">
-									{/* {task.title} */}
+									<Card/>
 								</p>
 							</div>
 						</div>

@@ -5,7 +5,6 @@ const taskSchema = joi.object({
    assignedTo : joi.string().required(),
    description: joi.string().required(),
    status : joi.string().required(),
-
 })
 
 export default taskSchema;

@@ -21,7 +21,13 @@ const taskSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.String,
             required: true,
         },
-    }
+    },
+     {
+		timestamps: {
+			createdAt: 'created_at',
+			updatedAt: 'updated_at',
+		},
+	},
 );
 // userSchema.index({ email:1 },{ unique:true })
 const Task = mongoose.model('Task', taskSchema);

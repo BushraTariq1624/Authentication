@@ -6,11 +6,12 @@ import chalk from "chalk";
 const createTask = async (req, res) => {
   console.log(chalk.bgCyan("incoming call to Task api"));
   if (!req.body) {
-    return req.status(400).json({ message: "Bad request" });
+    return res.status(400).json({ message: "Bad request" });
   }
   try {
     const { title, assignedTo,status, description } = req.body;
     const userId = req.headers.userId;
+    
     const newTask = await Task.create({ title, assignedTo,status, description });
     await User.findByIdAndUpdate(userId, { $push: { tasks: newTask._id } });
     res.status(201).json({ task: newTask });

@@ -5,7 +5,7 @@ const router = express.Router();
 import { createTask,getLoggedInTask} from "../controller/taskController.mjs";
 
 
-router.post("/task",tokenVerification, createTask);
-router.get("/getalltasks", tokenVerification, getLoggedInTask);
+router.post("/task/:userId",tokenVerification, createTask);
+router.get("/getalltasks/:userId", tokenVerification, getLoggedInTask);
 
 export default router;

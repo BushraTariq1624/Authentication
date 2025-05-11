@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			default: 'user',
 		},
+		tasks: [
+			{
+				type: mongoose.Types.ObjectId,
+				ref: "Task",
+			},
+		],
 		isCustomer: {
 			type: Boolean,
 			default: false,

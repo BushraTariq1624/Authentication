@@ -10,9 +10,11 @@ const createTask = async (req, res) => {
   }
   try {
     const { title, assignedTo,status, description } = req.body;
-    const userId = req.headers.userId;
+    const {userId} = req.params;
+    console.log(userId);
     
-    const newTask = await Task.create({ title, assignedTo,status, description });
+    
+    const newTask = await Task.create({ title, assignedTo,status, description, userId: userId });
     await User.findByIdAndUpdate(userId, { $push: { tasks: newTask._id } });
     res.status(201).json({ task: newTask });
     // const task = await taskSchema.validateAsync(req.body);
@@ -41,7 +43,7 @@ const createTask = async (req, res) => {
 
 const getLoggedInTask = async (req, res) => {
   try {
-    const userId = req.headers.userId;
+    const {userId} = req.params;
     const user = await User.findById(userId).populate({
       path: "tasks",
       options: { sort: { createdAt: -1 } },

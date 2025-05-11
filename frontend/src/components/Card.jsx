@@ -6,20 +6,27 @@ import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 // const apiUrl = import.meta.env.VITE_REACT_APP_BACKEND_API_BASEURL;
 
 const Card = () => {
-    const [Data, setData] = useState({tasks:[]});
+    const [Data, setData] = useState({ tasks: [] });
+    const userId= localStorage.getItem("userId")
+
     const headersGet = {
-        userId: localStorage.getItem("userId"),
+        // userId: localStorage.getItem("userId"),
+        userId,
         Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
     useEffect(() => {
         //  const token = localStorage.getItem("token")
         const fetch = async () => {
             // console.log("Headers being sent: ", headers); // ADD THIS
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/getalltasks`, {
+            try{
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/getalltasks/${userId}`, {
                 headers: headersGet,
             });
             console.log(response.data);
             setData(response.data.user);
+            }catch(error){
+                console.error("Error:", error);
+            }
         };
         fetch();
     }, []);
@@ -30,7 +37,7 @@ const Card = () => {
                     Data.tasks &&
                     Data.tasks.map((items, i) => (
                         <div
-                            key={i}
+                            key={items._id}
                             className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between"
                         >
                             {/* <div className="flex justify-end gap-6 text-gray-600 text-xl">
@@ -53,7 +60,7 @@ const Card = () => {
                                         } text-white py-2 rounded font-semibold transition duration-300 hover:cursor-pointer`}
                                     onClick={() => handleCompleteTask(items._id)}
                                 > */}
-                                    {/* {items.complete === true ? "Complete" : "In Progress"} */}
+                                {/* {items.complete === true ? "Complete" : "In Progress"} */}
                                 {/* </button> */}
                             </div>
                         </div>

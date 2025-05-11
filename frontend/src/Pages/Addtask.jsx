@@ -6,7 +6,7 @@ const Addtask = () => {
   const [formData, setFormData] = useState({
     title: '',
     assignedTo: '',
-    status:'',
+    status: '',
     description: ''
   });
 
@@ -18,7 +18,7 @@ const Addtask = () => {
       [e.target.name]: e.target.value
     });
   };
-
+  const userId = localStorage.getItem("userId")
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
 
@@ -26,7 +26,7 @@ const Addtask = () => {
     setStatus('Submitting...');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/task`, {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/task/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,14 +101,17 @@ const Addtask = () => {
                   <label htmlFor="email" className="leading-7 text-sm text-gray-600">
                     Status
                   </label>
-                  <input
-                    type="text"
-                    id="email"
+                  <select
                     name="status"
                     value={formData.status}
                     onChange={handleChange}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8"
+                  >
+                    <option value="">Select status</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                  </select>
                 </div>
               </div>
               <div className="p-2 w-full">
@@ -147,3 +150,4 @@ const Addtask = () => {
 };
 
 export default Addtask;
+

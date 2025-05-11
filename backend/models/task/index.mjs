@@ -15,19 +15,26 @@ const taskSchema = new mongoose.Schema(
             // type: String,
             type: mongoose.Schema.Types.String,
             required: true,
+            enum: ['pending', 'in-progress', 'done'],
+            default: 'pending',
         },
         description: {
             // type: String,
             type: mongoose.Schema.Types.String,
             required: true,
         },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
     },
-     {
-		timestamps: {
-			createdAt: 'created_at',
-			updatedAt: 'updated_at',
-		},
-	},
+    {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at',
+        },
+    },
 );
 // userSchema.index({ email:1 },{ unique:true })
 const Task = mongoose.model('Task', taskSchema);

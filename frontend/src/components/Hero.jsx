@@ -23,9 +23,8 @@ const Hero = () => {
 								<h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
 									Pending
 								</h1>
-								<p className="leading-relaxed mb-3">
+								
 									<Card/>
-								</p>
 							</div>
 						</div>
 						<div className="p-4 lg:w-1/3">

@@ -110,7 +110,7 @@ const Addtask = () => {
                     <option value="">Select status</option>
                     <option value="pending">Pending</option>
                     <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
+                    <option value="completed">Done</option>
                   </select>
                 </div>
               </div>

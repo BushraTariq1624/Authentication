@@ -7,7 +7,7 @@ import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Card = () => {
     const [Data, setData] = useState({ tasks: [] });
-    const userId= localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId")
 
     const headersGet = {
         // userId: localStorage.getItem("userId"),
@@ -18,13 +18,13 @@ const Card = () => {
         //  const token = localStorage.getItem("token")
         const fetch = async () => {
             // console.log("Headers being sent: ", headers); // ADD THIS
-            try{
+            try {
                 const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/Addtask/getalltasks/${userId}`, {
-                headers: headersGet,
-            });
-            console.log(response.data);
-            setData(response.data.user);
-            }catch(error){
+                    headers: headersGet,
+                });
+                console.log(response.data);
+                setData(response.data.user);
+            } catch (error) {
                 console.error("Error:", error);
             }
         };
@@ -32,7 +32,7 @@ const Card = () => {
     }, []);
     return (
         <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className="flex flex-col gap-6 p-6">
                 {Data &&
                     Data.tasks &&
                     Data.tasks.map((items, i) => (
@@ -49,11 +49,14 @@ const Card = () => {
                             </div> */}
                             <div>
                                 <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                                    {items.title}
+                                    TaskTitle: {items.title}
                                 </h3>
-                                <p className="text-gray-600">{items.description}</p>
-                            </div>
+                                <p className="text-gray-600">Assigned to: {items.assignedTo}</p>
 
+                                <p className="text-gray-600">Description: {items.description}</p>
+                                <p className="text-gray-600">status: {items.status}</p>
+
+                            </div>
                             <div className="mt-6 flex flex-col gap-3">
                                 {/* <button
                                     className={`${items.complete === false ? "bg-fuchsia-800" : "bg-green-700"

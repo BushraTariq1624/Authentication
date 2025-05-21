@@ -51,7 +51,7 @@ const Hero = () => {
 								<div className="flex flex-col gap-6 p-6">
 									{Data &&
 										Data.tasks &&
-										Data.tasks.map((items, i) => (
+										Data.tasks.filter(task => task.status === "pending").map((items) => (
 											<div
 												key={items._id}
 												className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between"
@@ -64,15 +64,14 @@ const Hero = () => {
                                 />
                             </div> */}
 												<div>
-													{items.status=="pending"?(<div>
 														<h3 className="text-2xl font-bold text-gray-800 mb-2">
-														TaskTitle: {items.title}
-													</h3>
-													<p className="text-gray-600">Assigned to: {items.assignedTo}</p>
+															Task Title: {items.title}
+														</h3>
+														<p className="text-gray-600">Assigned To: {items.assignedTo}</p>
 
-													<p className="text-gray-600">Description: {items.description}</p>
-													<p className="text-gray-600">status: {items.status}</p>
-													</div>):("Task move to another status")}
+														<p className="text-gray-600">Description: {items.description}</p>
+														<p className="text-gray-600">Status: {items.status}</p>
+													
 
 												</div>
 												<div className="mt-6 flex flex-col gap-3">
@@ -90,25 +89,95 @@ const Hero = () => {
 							</div>
 						</div>
 						<div className="p-4 lg:w-1/3">
-							<div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+							<div className="h-full  bg-orange-300  bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
 								<h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-									In Process
+									In Progress
 								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-									microdosing tousled waistcoat.
-								</p>
+								<div className="flex flex-col gap-6 p-6">
+									{Data &&
+										Data.tasks &&
+										Data.tasks.filter(task => task.status === "in-progress").map((items) => (
+											<div
+												key={items._id}
+												className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between"
+											>
+												{/* <div className="flex justify-end gap-6 text-gray-600 text-xl">
+                                <FontAwesomeIcon
+                                    icon={faTrash}
+                                    className="hover:text-red-500 cursor-pointer transition duration-300"
+                                    onClick={() => deleteTask(items._id)}
+                                />
+                            </div> */}
+												<div>
+												
+														<h3 className="text-2xl font-bold text-gray-800 mb-2">
+															Task Title: {items.title}
+														</h3>
+														<p className="text-gray-600">Assigned To: {items.assignedTo}</p>
+
+														<p className="text-gray-600">Description: {items.description}</p>
+														<p className="text-gray-600">Status: {items.status}</p>
+												
+
+												</div>
+												<div className="mt-6 flex flex-col gap-3">
+													{/* <button
+                                    className={`${items.complete === false ? "bg-fuchsia-800" : "bg-green-700"
+                                        } text-white py-2 rounded font-semibold transition duration-300 hover:cursor-pointer`}
+                                    onClick={() => handleCompleteTask(items._id)}
+                                > */}
+													{/* {items.complete === true ? "Complete" : "In Progress"} */}
+													{/* </button> */}
+												</div>
+											</div>
+										))}
+								</div>
 							</div>
 						</div>
 						<div className="p-4 lg:w-1/3">
-							<div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+							<div className="h-full  bg-orange-300  bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
 								<h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
 									Done
 								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-									microdosing tousled waistcoat.
-								</p>
+								<div className="flex flex-col gap-6 p-6">
+									{Data &&
+										Data.tasks &&
+										Data.tasks.filter(task => task.status === "done").map((items) => (
+											<div
+												key={items._id}
+												className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between"
+											>
+												{/* <div className="flex justify-end gap-6 text-gray-600 text-xl">
+                                <FontAwesomeIcon
+                                    icon={faTrash}
+                                    className="hover:text-red-500 cursor-pointer transition duration-300"
+                                    onClick={() => deleteTask(items._id)}
+                                />
+                            </div> */}
+												<div>
+													
+														<h3 className="text-2xl font-bold text-gray-800 mb-2">
+															Task Title: {items.title}
+														</h3>
+														<p className="text-gray-600">Assigned To: {items.assignedTo}</p>
+
+														<p className="text-gray-600">Description: {items.description}</p>
+														<p className="text-gray-600">Status: {items.status}</p>
+													
+
+												</div>
+												<div className="mt-6 flex flex-col gap-3">
+													{/* <button
+                                    className={`${items.complete === false ? "bg-fuchsia-800" : "bg-green-700"
+                                        } text-white py-2 rounded font-semibold transition duration-300 hover:cursor-pointer`}
+                                    onClick={() => handleCompleteTask(items._id)}
+                                > */}
+													{/* {items.complete === true ? "Complete" : "In Progress"} */}
+													{/* </button> */}
+												</div>
+											</div>
+										))}
+								</div>
 							</div>
 						</div>
 					</div>
